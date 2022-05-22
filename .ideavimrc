@@ -1,0 +1,82 @@
+source ~/.vimrc
+
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+set clipboard^=unnamed,unnamedplus
+set lazyredraw
+set ignorecase
+set incsearch
+set smartcase
+set idearefactormode=keep
+set ideajoin
+set ideamarks
+set textobj-indent
+
+" set multiple-cursors
+" remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+nmap <C-x> <Plug>SkipOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+nmap <C-p> <Plug>RemoveOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+" note that the default <a-n> and g<a-n> shortcuts don't work on mac due to dead keys.
+" <a-n> is used to enter accented text e.g. ñ
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+
+" IntelliJ actions mapping
+map ,a <Action>(GotoAction)
+
+" code inspection
+map ,,f <Action>(OpenFile)
+map ,g <Action>(GotoFile)
+map ,f <Action>(FindInPath)
+map <S-M-s> <Action>(ChangesView.Shelve)
+
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader><leader>s <Action>(SelectInProjectView)
+map <leader>o <Action>(FileStructurePopup)
+map <leader>u :action FindUsages<CR>
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>g <Action>(ActivateVersionControlToolWindow)
+map <S-Space> <Action>(GotoNextError)
+map <leader>pw <Action>(OpenProjectWindows)
+
+map gc <Action>(GotoClass)
+map gi <Action>(GotoImplementation)
+map gd <Action>(GotoDeclaration)
+map gp <Action>(GotoSuperMethod)
+map gsb <Action>(GotoSymbol)
+map tt <Action>(GotoTest)
+map gb <Action>(Back)
+map gf <Action>(Forward)
+map gm <Action>(ToggleBookmark)
+map gsm <Action>(ShowBookmarks)
+map <leader>m <Action>(MoveEditorToOppositeTabGroup)
+nnoremap <leader>zc :action CollapseAllRegions<CR>
+nnoremap <leader>zo :action ExpandAllRegions<CR>
+
+" refactoring
+map <leader><leader>t <Action>(Refactorings.QuickListPopupAction)
+map <leader>r <Action>(RenameElement)
+map gl <Action>(ReformatCode)
+map <leader>lt <Action>(Javascript.Linters.EsLint.Fix)
+
+" debugging
+map <leader>e :action EvaluateExpression<CR>
+map <leader><leader>r <Action>(Run)
+map <leader><leader>c <Action>(RunClass)
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>d <Action>(Debug)
+map <leader>c <Action>(Stop)
+map <leader>,r <Action>(Replace)
+
+" terminal
+map ,t <Action>(ActivateTerminalToolWindow)
