@@ -18,6 +18,7 @@ call plug#end()
 syntax on
 set background=dark
 colorscheme solarized
+set vb
 
 " Common keymap
 noremap ; :
@@ -25,6 +26,7 @@ nnoremap L $
 nnoremap H ^
 let mapleader = " "
 
+" Plugin: easymotion
 map <Leader> <Plug>(easymotion-prefix)
 " nmap <Leader>2s <Plug>(easymotion-s2)
 " Turn on case-insensitive feature
@@ -37,11 +39,23 @@ hi EasyMotionShade  ctermbg=none ctermfg=none
 let g:multi_cursor_select_all_word_key = '<S-C-a>'
 let g:multi_cursor_select_all_key      = 'g<S-C-a>'
 
+" Plugin: NERDTree
 nnoremap <leader><leader>n :NERDTreeFocus<CR>
 nnoremap <leader><leader>t :NERDTreeToggle<CR>
 nnoremap <leader><leader>f :NERDTreeFind<CR>
 
-set vb
+" Plugin: FZF
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-t> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>/ :BLines<CR>
+nnoremap <silent> <Leader>' :Marks<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+nnoremap <silent> <Leader>H :Helptags<CR>
+nnoremap <silent> <Leader>hh :History<CR>
+nnoremap <silent> <Leader>h: :History:<CR>
+nnoremap <silent> <Leader>h/ :History/<CR>
+
 
 if has("gui_running")
   syntax on
