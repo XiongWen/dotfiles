@@ -56,7 +56,6 @@ nnoremap <silent> <Leader>hh :History<CR>
 nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR>
 
-
 if has("gui_running")
   syntax on
   set hlsearch
