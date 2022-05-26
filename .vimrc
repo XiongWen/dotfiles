@@ -46,7 +46,7 @@ nnoremap <leader><leader>f :NERDTreeFind<CR>
 
 " Plugin: FZF
 nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <C-t> :Files<CR>
+nnoremap <silent> <C-t> :GFiles<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 nnoremap <silent> <Leader>/ :BLines<CR>
 nnoremap <silent> <Leader>' :Marks<CR>
