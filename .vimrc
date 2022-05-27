@@ -12,13 +12,22 @@ Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
+Plug 'rust-lang/rust.vim'
 call plug#end()
 " End of plugin management
 
 syntax on
+filetype plugin indent on
 set background=dark
 colorscheme solarized
 set vb
+" set cursor shape
+" Insert mode: solid vertical bar
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" Replace mode: solid underscore
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" Normal mode: solid block
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Common keymap
 noremap ; :
