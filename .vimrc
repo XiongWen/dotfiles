@@ -22,12 +22,18 @@ set background=dark
 colorscheme solarized
 set vb
 " set cursor shape
-" Insert mode: solid vertical bar
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" Replace mode: solid underscore
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" Normal mode: solid block
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).	
+let &t_SI = "\e[6 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[2 q"
+set ttimeoutlen=10	" wait up to 10ms after Esc for special key
 
 " Common keymap
 noremap ; :
@@ -55,7 +61,8 @@ nnoremap <leader><leader>f :NERDTreeFind<CR>
 
 " Plugin: FZF
 nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <C-t> :GFiles<CR>
+nnoremap <silent> <C-t> :Files<CR>
+nnoremap <silent> <C-g> :GFiles<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 nnoremap <silent> <Leader>/ :BLines<CR>
 nnoremap <silent> <Leader>' :Marks<CR>

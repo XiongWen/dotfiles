@@ -13,7 +13,18 @@ set ideajoin
 set ideamarks
 set textobj-indent
 
-" set multiple-cursors
+" Tabs
+nmap <S-Tab> :tabprev<CR>
+nmap <Tab> :tabnext<CR>
+" Split window
+nmap ss :split<CR><C-w>w
+nmap sv :vsplit<CR><C-w>w
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
+
+"set multiple-cursors
 " remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
 xmap <C-n> <Plug>NextWholeOccurrence
@@ -32,7 +43,8 @@ xmap g<S-C-n> <Plug>AllOccurrences
 
 " IntelliJ actions mapping
 map ,a <Action>(GotoAction)
-
+map <C-k> <Action>(EditorScrollUp)
+map <C-j> <Action>(EditorDown)
 " code inspection
 map ,,f <Action>(OpenFile)
 map ,g <Action>(GotoFile)
@@ -68,7 +80,6 @@ map <leader><leader>t <Action>(Refactorings.QuickListPopupAction)
 map <leader>r <Action>(RenameElement)
 map gl <Action>(ReformatCode)
 map <leader>lt <Action>(Javascript.Linters.EsLint.Fix)
-
 " debugging
 map <leader>e :action EvaluateExpression<CR>
 map <leader><leader>r <Action>(Run)
@@ -77,6 +88,5 @@ map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>d <Action>(Debug)
 map <leader>c <Action>(Stop)
 map <leader>,r <Action>(Replace)
-
 " terminal
 map ,t <Action>(ActivateTerminalToolWindow)
