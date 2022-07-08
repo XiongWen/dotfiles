@@ -1,0 +1,5 @@
+require('myplugins/lsp')
+require('myplugins/lualine')
+require('myplugins/devicons')
+require('myplugins/nvim-treesitter')
+require('myplugins/nvim-test')
