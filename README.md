@@ -1,5 +1,5 @@
 # dotfiles
-My dotfiles for a development environment with MacOS, iTerm, zsh, IntelliJ, Vim, Git, VScode.
+My dotfiles for a development environment with MacOS, iTerm, Alacritty, tmux, Zsh, IntelliJ, Vim/Neovim, Git.
 
 # Vim
 ## colour scheme 
@@ -23,7 +23,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 ## Theme
-I use agnoster theme with Powerline fonts. agnoster theme comes with ohmyzsh, just need to enable it in .zshrc file.
+I use agnoster theme with Powerline fonts. The agnoster theme comes with ohmyzsh, just need to enable it in .zshrc file.
 Use following command to install Powerline fonts:
 
 ```shell
@@ -35,9 +35,15 @@ cd fonts
 # clean-up a bit
 cd ..
 rm -rf fonts
-```shell
+```
 
 In iTerm2, navigate to Preferences -> Profiles -> [myProfile] -> Text, tick "Use built-in Powerline glyphs" may just work fine without specifying a Powerline font. With default terminal of MacOS, need to set the font to one of installed Powerline fonts.
+
+In addition, I also use the hack nerd font for terminal and Neovim, which can be installed with the following command:
+```shell
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font
+```
 
 ## Plugins
 The main plugins I use include git forgit z. The [forgit](https://github.com/wfxr/forgit) needs to be installed as a custom plugin by the following command:
