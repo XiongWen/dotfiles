@@ -1,5 +1,8 @@
 require('myplugins/lsp')
+require('myplugins/nvim-cmp')
 require('myplugins/lualine')
 require('myplugins/devicons')
 require('myplugins/nvim-treesitter')
 require('myplugins/nvim-test')
+require('myplugins/autopairs')
+require('myplugins/ts-autotag')

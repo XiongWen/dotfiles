@@ -36,26 +36,20 @@ local on_attach = function(client, bufnr)
   --end 
 end
 
-local coq = require('coq')
 local nvim_lsp = require('lspconfig')
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
 for _, lsp in pairs(servers) do
-  nvim_lsp[lsp].setup(coq.lsp_ensure_capabilities({
+  nvim_lsp[lsp].setup{
     on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     }
-  }))
+  }
 end
-
---local vim.g.coq_settings = {
-  --["display.icons.mode"] = 'none',
-  -- ["keymap.pre_select"] = true
---}
 
 local saga = require 'lspsaga'
 saga.init_lsp_saga {

@@ -15,15 +15,36 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'klen/nvim-test'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'tpope/vim-fugitive'
-" main one
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" 9000+ Snippets
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
+" For luasnip
+"Plug 'L3MON4D3/LuaSnip'
+"Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'onsails/lspkind-nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
+
 call plug#end()
 
 set rtp+=/opt/homebrew/opt/fzf
-set encoding=UTF-8
-colorscheme NeoSolarized
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c> # fix fzf popup does not close by pressing <esc>
+set encoding=utf-8
+" Ignore case when searching
+set ignorecase
+set nohls
+set nosc noru nosm
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+set background=dark
+syntax enable
 " true color
 if exists("&termguicolors") && exists("&winblend")
   syntax enable
@@ -34,10 +55,8 @@ if exists("&termguicolors") && exists("&winblend")
   set background=dark
   " Use NeoSolarized
   let g:neosolarized_termtrans=1
-  "runtime ./colors/NeoSolarized.vim
   colorscheme NeoSolarized
 endif
-
 " Use OSX clipboard to copy and to paste
 set clipboard+=unnamedplus
 set number
@@ -65,6 +84,11 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
+" Resize window
+nmap s<left> <C-w><
+nmap s<right> <C-w>>
+nmap s<up> <C-w>+
+nmap s<down> <C-w>-
 " neovim terminal
 tnoremap <Esc> <C-\><C-n>
 	
@@ -73,6 +97,10 @@ noremap ; :
 nnoremap L $
 nnoremap H ^
 let mapleader = " "
+
+" Commands
+" close all buffers except current one
+command! BufOnly execute '%bdelete|edit#|bdelete#'
 
 " Plugin: easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -100,12 +128,11 @@ nnoremap <silent> <Leader>f :Rg<CR>
 nnoremap <silent> <Leader>/ :BLines<CR>
 nnoremap <silent> <Leader>' :Marks<CR>
 nnoremap <silent> <Leader>g :Commits<CR>
+nnoremap <silent> <Leader>hf :BCommits<CR>
 nnoremap <silent> <Leader>H :Helptags<CR>
 nnoremap <silent> <Leader>hh :History<CR>
 nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR>
-
-let g:coq_settings = { 'auto_start': 'shut-up',   'display.icons.mode': 'long', 'keymap.pre_select': v:true }
 
 lua require('myplugins')
 
@@ -121,3 +148,20 @@ nmap <silent> ,tf :TestFile<CR>
 nmap <silent> ,ta :TestSuite<CR>
 nmap <silent> ,tl :TestLast<CR>
 nmap <silent> ,tg :TestVisit<CR>
+
+" Plugin: vsnip
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" Use snippet for multiple filetypes
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
