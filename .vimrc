@@ -13,13 +13,16 @@ Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'rust-lang/rust.vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
 " End of plugin management
 
+" Use OSX clipboard to copy and to paste
+set clipboard=unnamed
 syntax on
 filetype plugin indent on
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 set vb
 " set cursor shape
 " Reference chart of values:
@@ -40,6 +43,14 @@ noremap ; :
 nnoremap L $
 nnoremap H ^
 let mapleader = " "
+
+" Split window
+nmap ss :split<CR><C-w>w
+nmap sv :vsplit<CR><C-w>w
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
 
 " Plugin: easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -75,8 +86,9 @@ nnoremap <silent> <Leader>h/ :History/<CR>
 if has("gui_running")
   syntax on
   set hlsearch
-  colorscheme solarized
+  colorscheme gruvbox
   set bs=2
   set ai
   set ruler
+  set guifont=HackNerdFontComplete-Regular:h18
 endif

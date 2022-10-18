@@ -1,6 +1,7 @@
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = { "markdown" },
     disable = {},
   },
   indent = {
@@ -10,14 +11,25 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "tsx",
     "toml",
+    "go",
 		"rust",
 		"python",
     "json",
     "yaml",
     "html",
+    "css",
     "scss",
     "javascript",
-		"typescript"
+		"typescript",
+    "bash",
+    "sql",
+    "lua",
+    "vim",
+    "markdown",
+    "markdown_inline",
+    "gitignore",
+    "dockerfile",
+    "dot",
   },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

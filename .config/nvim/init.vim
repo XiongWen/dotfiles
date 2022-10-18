@@ -1,10 +1,11 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'overcache/NeoSolarized'
+Plug 'morhetz/gruvbox'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neovim/nvim-lspconfig'
@@ -32,10 +33,17 @@ Plug 'onsails/lspkind-nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+" Plug 'epwalsh/obsidian.nvim'
+Plug 'mickael-menu/zk-nvim'
+
+Plug 'numToStr/Comment.nvim'
 call plug#end()
 
 set rtp+=/opt/homebrew/opt/fzf
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c> # fix fzf popup does not close by pressing <esc>
+" fix fzf popup does not close by pressing <esc>
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c> 
 set encoding=utf-8
 " Ignore case when searching
 set ignorecase
@@ -45,6 +53,7 @@ set nosc noru nosm
 set lazyredraw
 set background=dark
 syntax enable
+set termguicolors
 " true color
 if exists("&termguicolors") && exists("&winblend")
   syntax enable
@@ -53,9 +62,9 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=dark
-  " Use NeoSolarized
-  let g:neosolarized_termtrans=1
-  colorscheme NeoSolarized
+  " Use gruvbox
+  colorscheme gruvbox
+  let g:gruvbox_italic=1
 endif
 " Use OSX clipboard to copy and to paste
 set clipboard+=unnamedplus
@@ -70,12 +79,14 @@ set expandtab
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
+" set text wrap for markdown files
+autocmd! BufNewFile,BufRead *.md set wrap
 " Tabs
 nmap tl :tabs<CR>
 nmap te :tabedit<CR>
 nmap tc :tabclose<CR>
-nmap <S-Tab> :tabprev<CR>
-nmap <Tab> :tabnext<CR>
+"nmap <S-Tab> :tabprev<CR>
+"nmap <Tab> :tabnext<CR>
 " Split window
 nmap ss :split<CR><C-w>w
 nmap sv :vsplit<CR><C-w>w
@@ -84,6 +95,7 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
+map <leader>e <C-w><C-w>
 " Resize window
 nmap s<left> <C-w><
 nmap s<right> <C-w>>
@@ -104,7 +116,8 @@ command! BufOnly execute '%bdelete|edit#|bdelete#'
 
 " Plugin: easymotion
 map <Leader> <Plug>(easymotion-prefix)
-nmap <Leader>2s <Plug>(easymotion-s2)
+nmap <Leader>s <Plug>(easymotion-s2)
+nmap ,s <Plug>(easymotion-s)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 " Smartsign (type `3` and match `3`&`#`)
@@ -116,9 +129,17 @@ let g:multi_cursor_select_all_word_key = '<S-C-a>'
 let g:multi_cursor_select_all_key      = 'g<S-C-a>'
 
 " Plugin: NERDTree
-nnoremap <leader><leader>n :NERDTreeFocus<CR>
-nnoremap <leader><leader>t :NERDTreeToggle<CR>
-nnoremap <leader><leader>f :NERDTreeFind<CR>
+" let g:NERDTreeShowHidden = 1
+" let g:NERDTreeAutoDeleteBuffer = 1
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" nnoremap <leader><leader>n :NERDTreeFocus<CR>
+" nnoremap <leader><leader>t :NERDTreeToggle<CR>
+" nnoremap <leader><leader>f :NERDTreeFind<CR>
+
+" Plugin chadtree
+nnoremap <leader>v <cmd>CHADopen<cr>
+nnoremap <leader>ll <cmd>call setqflist([])<cr>
 
 " Plugin: FZF
 nnoremap <silent> <Leader>b :Buffers<CR>
@@ -133,15 +154,11 @@ nnoremap <silent> <Leader>H :Helptags<CR>
 nnoremap <silent> <Leader>hh :History<CR>
 nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR>
+command! -bang -nargs=* Rg2
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
 
 lua require('myplugins')
-
-" show hover doc
-nnoremap <silent>K :Lspsaga hover_doc<CR>
-inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
-nnoremap <silent> gh :Lspsaga lsp_finder<CR>
-nnoremap <silent> <C-j> :Lspsaga diagnostic_jump_next<CR>
-
+ 
 " vim-test
 nmap <silent> ,tt :TestNearest<CR>
 nmap <silent> ,tf :TestFile<CR>
@@ -165,3 +182,9 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 let g:vsnip_filetypes = {}
 let g:vsnip_filetypes.javascriptreact = ['javascript']
 let g:vsnip_filetypes.typescriptreact = ['typescript']
+
+" Open file in Obsidian vault
+command IO execute "silent !open 'obsidian://open?vault=myNotes&file=" . expand('%:r') . "'"
+nnoremap <leader>io :IO<CR>
+" markdown-preview
+nnoremap <leader>pv :MarkdownPreview<CR>
