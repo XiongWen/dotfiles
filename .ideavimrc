@@ -43,8 +43,8 @@ xmap g<S-C-n> <Plug>AllOccurrences
 
 " IntelliJ actions mapping
 map ,a <Action>(GotoAction)
-map <C-k> <Action>(EditorScrollUp)
-map <C-j> <Action>(EditorDown)
+"map <C-k> <Action>(EditorScrollUp)
+"map <C-j> <Action>(EditorDown)
 " code inspection
 map ,,f <Action>(OpenFile)
 map ,g <Action>(GotoFile)
@@ -56,10 +56,12 @@ map <leader><leader>s <Action>(SelectInProjectView)
 map <leader>o <Action>(FileStructurePopup)
 map <leader>u :action FindUsages<CR>
 map <leader>a <Action>(Annotate)
-map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>hf <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>hs <Action>(Vcs.ShowHistoryForBlock)
 map <leader>g <Action>(ActivateVersionControlToolWindow)
 map <S-Space> <Action>(GotoNextError)
 map <leader>pw <Action>(OpenProjectWindows)
+map <leader>pm <Action>(ManageRecentProjects)
 
 map gc <Action>(GotoClass)
 map gi <Action>(GotoImplementation)
@@ -80,10 +82,12 @@ map <leader><leader>t <Action>(Refactorings.QuickListPopupAction)
 map <leader>r <Action>(RenameElement)
 map gl <Action>(ReformatCode)
 map <leader>lt <Action>(Javascript.Linters.EsLint.Fix)
-" debugging
-map <leader>e :action EvaluateExpression<CR>
+" test
 map <leader><leader>r <Action>(Run)
 map <leader><leader>c <Action>(RunClass)
+map <leader>tc <Action>(CreateRunConfiguration)
+" debugging
+map <leader>e :action EvaluateExpression<CR>
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>d <Action>(Debug)
 map <leader>c <Action>(Stop)
