@@ -4,7 +4,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'godlygeek/tabular'
-"Plug 'preservim/nerdtree'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -26,6 +25,8 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'Voronenko/vscode-plantuml-stdlib-snippets'
+Plug 'aklt/plantuml-syntax'
 " For luasnip
 "Plug 'L3MON4D3/LuaSnip'
 "Plug 'saadparwaiz1/cmp_luasnip'
@@ -39,6 +40,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'mickael-menu/zk-nvim'
 
 Plug 'numToStr/Comment.nvim'
+Plug 'tommcdo/vim-fubitive'
+
 call plug#end()
 
 set rtp+=/opt/homebrew/opt/fzf
@@ -81,6 +84,8 @@ set si "Smart indent
 set nowrap "No Wrap lines
 " set text wrap for markdown files
 autocmd! BufNewFile,BufRead *.md set wrap
+" enable syntax highlight for markdown files
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " Tabs
 nmap tl :tabs<CR>
 nmap te :tabedit<CR>
@@ -95,13 +100,13 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
-map <leader>e <C-w><C-w>
+map ,e <C-w>w
 " Resize window
-nmap s<left> <C-w><
-nmap s<right> <C-w>>
-nmap s<up> <C-w>+
-nmap s<down> <C-w>-
-" neovim terminal
+nmap s<left> 5<C-w><
+nmap s<right> 5<C-w>>
+nmap s<up> 5<C-w>+
+nmap s<down> 5<C-w>-
+" Esc in neovim terminal
 tnoremap <Esc> <C-\><C-n>
 	
 " Common keymap
@@ -116,8 +121,8 @@ command! BufOnly execute '%bdelete|edit#|bdelete#'
 
 " Plugin: easymotion
 map <Leader> <Plug>(easymotion-prefix)
-nmap <Leader>s <Plug>(easymotion-s2)
-nmap ,s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
+nmap ,s <Plug>(easymotion-s2)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 " Smartsign (type `3` and match `3`&`#`)
@@ -127,15 +132,6 @@ let g:EasyMotion_use_smartsign_us = 1
 
 let g:multi_cursor_select_all_word_key = '<S-C-a>'
 let g:multi_cursor_select_all_key      = 'g<S-C-a>'
-
-" Plugin: NERDTree
-" let g:NERDTreeShowHidden = 1
-" let g:NERDTreeAutoDeleteBuffer = 1
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" nnoremap <leader><leader>n :NERDTreeFocus<CR>
-" nnoremap <leader><leader>t :NERDTreeToggle<CR>
-" nnoremap <leader><leader>f :NERDTreeFind<CR>
 
 " Plugin chadtree
 nnoremap <leader>v <cmd>CHADopen<cr>
