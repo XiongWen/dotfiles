@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
-local cmp = require('cmp')
-local lspkind = require('lspkind')
+local status, cmp = pcall(require, "cmp")
+if (not status) then return end
+local lspkind = require 'lspkind'
 
 cmp.setup({
   view = {
@@ -28,21 +29,25 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- For vsnip users.
     -- { name = 'luasnip' }, -- For luasnip users.
     { name = 'path' },
+    { name = 'nvim_lua' },
   }, {
     { name = 'buffer' },
   })
@@ -57,8 +62,8 @@ cmp.setup.filetype('gitcommit', {
   })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
@@ -75,16 +80,5 @@ cmp.setup.cmdline(':', {
   })
 })
 
-vim.o.completeopt='menuone,noinsert,noselect'
+vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
-
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local nvim_lsp = require('lspconfig')
-local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
-for _, lsp in pairs(servers) do
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities,
-  }
-end
-

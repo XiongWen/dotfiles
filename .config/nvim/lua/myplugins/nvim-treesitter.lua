@@ -1,11 +1,14 @@
-require'nvim-treesitter.configs'.setup {
+local status, treesitter = pcall(require, "nvim-treesitter.configs")
+if (not status) then return end
+
+treesitter.setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = { "markdown" },
     disable = {},
   },
   indent = {
-    enable = false,
+    enable = true,
     disable = {},
   },
   ensure_installed = {
@@ -31,6 +34,13 @@ require'nvim-treesitter.configs'.setup {
     "dockerfile",
     "dot",
   },
+  autotag = {
+    enable = true,
+  }
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+
+-- Treesitter folding 
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
