@@ -1,5 +1,3 @@
-source ~/.vimrc
-
 nnoremap \e :e ~/.ideavimrc<CR>
 nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
@@ -13,6 +11,11 @@ set ideajoin
 set ideamarks
 set textobj-indent
 
+" Common keymap
+noremap ; :
+nnoremap L $
+nnoremap H ^
+let mapleader = " "
 " Tabs
 nmap <S-Tab> :tabprev<CR>
 nmap <Tab> :tabnext<CR>
@@ -24,6 +27,15 @@ map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
 
+" Plugins
+Plug 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
+Plug 'preservim/nerdtree'
+nnoremap <leader><leader>n :NERDTreeFocus<CR>
+nnoremap <leader><leader>t :NERDTreeToggle<CR>
+nnoremap <leader><leader>f :NERDTreeFind<CR>
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
 "set multiple-cursors
 " remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -43,9 +55,7 @@ xmap g<S-C-n> <Plug>AllOccurrences
 
 " IntelliJ actions mapping
 map ,a <Action>(GotoAction)
-"map <C-k> <Action>(EditorScrollUp)
-"map <C-j> <Action>(EditorDown)
-" code inspection
+" code navigation
 map ,,f <Action>(OpenFile)
 map ,g <Action>(GotoFile)
 map ,f <Action>(FindInPath)
@@ -86,6 +96,7 @@ map <leader>lt <Action>(Javascript.Linters.EsLint.Fix)
 map <leader><leader>r <Action>(Run)
 map <leader><leader>c <Action>(RunClass)
 map <leader>tc <Action>(CreateRunConfiguration)
+map <leader>tf <Action>(RerunFailedTests)
 " debugging
 map <leader>e :action EvaluateExpression<CR>
 map <leader>b <Action>(ToggleLineBreakpoint)
