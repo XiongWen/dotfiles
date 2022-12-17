@@ -20,7 +20,7 @@ require("zk").setup({
   },
 })
 
-local opts = { noremap=true, silent=false }
+local opts = { noremap=true }
 
 -- Create a new note after asking for its title.
 vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
