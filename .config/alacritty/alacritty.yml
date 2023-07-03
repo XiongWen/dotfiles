@@ -14,16 +14,16 @@ scrolling:
   multiplier: 3
 font:
   normal:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Regular
   bold:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
   size: 16.0
 # If `true`, bold text is drawn using the bright color variants.
@@ -140,6 +140,8 @@ shell:
   program: /bin/zsh
   args:
     - --login
+
+window.option_as_alt: OnlyLeft
 # Map the keys
 key_bindings:
   # (macOS only)
@@ -163,3 +165,4 @@ key_bindings:
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+  - { key: J,              mods: Alt,                        chars: "\x1bj"                }
