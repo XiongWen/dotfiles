@@ -4,7 +4,8 @@ My dotfiles for a development environment with MacOS, iTerm, Alacritty, tmux, Zs
 # Vim
 ## colour scheme 
 - Option 1: gruvbox
- - Put the following in vim config file
+
+Put the following in vim config file
 ```shell
 Plug 'morhetz/gruvbox'
 
