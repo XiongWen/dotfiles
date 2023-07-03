@@ -70,6 +70,7 @@ map <leader>hf <Action>(Vcs.ShowTabbedFileHistory)
 map <leader>hs <Action>(Vcs.ShowHistoryForBlock)
 map <leader>g <Action>(ActivateVersionControlToolWindow)
 map <S-Space> <Action>(GotoNextError)
+
 map <leader>pw <Action>(OpenProjectWindows)
 map <leader>pm <Action>(ManageRecentProjects)
 
@@ -105,3 +106,5 @@ map <leader>c <Action>(Stop)
 map <leader>,r <Action>(Replace)
 " terminal
 map ,t <Action>(ActivateTerminalToolWindow)
+
+map ,c <Action>(osmedile.intellij.stringmanip.WordsAndCamelToConstantStyleCaseAction)
